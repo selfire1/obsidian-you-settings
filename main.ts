@@ -11,28 +11,6 @@ export default class YouTheme extends Plugin {
 
   this.addStyle();
 
-  // Watch for system changes to color theme 
-
-  let media = window.matchMedia('(prefers-color-scheme: dark)');
-
-  let callback = () => {
-    if (media.matches && this.settings.useSystemTheme) {
-      console.log('Dark mode active');
-      this.updateDarkStyle()
-
-    } else if (this.settings.useSystemTheme) {
-      console.log('Light mode active');
-      this.updateLightStyle()
-    }
-  }
-  media.addEventListener('change', callback);
-
-  // Remove listener when we unload
-
-  this.register(() => media.removeEventListener('change', callback));
-
-  callback();
-
   const lightStyles = ['minimal-light', 'minimal-light-tonal', 'minimal-light-contrast', 'minimal-light-white'];
   const darkStyles = ['minimal-dark', 'minimal-dark-tonal', 'minimal-dark-black'];
   const imgGridStyles = ['img-grid','img-grid-ratio','img-nogrid'];
