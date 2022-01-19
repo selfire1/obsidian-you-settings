@@ -105,85 +105,19 @@ export default class YouTheme extends Plugin {
 
   removeStyle() {
     document.body.removeClass('you-default','you-forest','you-coral');
-    document.body.addClass(this.settings.lightStyle,this.settings.darkStyle);
+    document.body.addClass(this.settings.scheme);
   }
 
 }
 
 interface YouSettings {
   theme: string;
-  accentHue: number;
-  accentSat: number;
-  lightStyle: string;
-  darkStyle: string;
-  uiFont: string;
-  textFont: string;
-  editorFont: string;
-  monoFont: string;
-  fancyCursor: boolean;
-  minimalIcons: boolean;
-  trimNames: boolean;
-  labeledNav: boolean;
-  bordersToggle: boolean;
-  bordersTitle: boolean;
-  focusMode: boolean;
-  lineWidth: number;
-  lineWidthWide: number;
-  maxWidth: number;
-  trimCols: boolean;
-  maxColWidth: string;
-  imgGrid: boolean;
-  tableWidth: string;
-  iframeWidth: string;
-  imgWidth: string;
-  fullWidthMedia: boolean,
-  minimalStatus: boolean,
-  textNormal: number;
-  textSmall: number;
-  underlineInternal: boolean;
-  underlineExternal: boolean;
-  useSystemTheme: boolean;
-  folding: boolean;
-  relationLinesPreview: boolean;
-  relationLinesEdit: boolean;
+  scheme: string;
 }
 
 const DEFAULT_SETTINGS: YouSettings = {
   theme: 'moonstone',
-  accentHue: 201,
-  accentSat: 17,
-  lightStyle: 'you-default',
-  darkStyle: 'minimal-dark',
-  uiFont: '-apple-system,BlinkMacSystemFont,"Segoe UI Emoji","Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,sans-serif',
-  textFont: '-apple-system,BlinkMacSystemFont,"Segoe UI Emoji","Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,sans-serif',
-  editorFont: '-apple-system,BlinkMacSystemFont,"Segoe UI Emoji","Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,sans-serif',
-  monoFont: 'Menlo,SFMono-Regular,Consolas,Roboto Mono,monospace',
-  lineWidth: 40,
-  lineWidthWide: 50,
-  maxWidth: 88,
-  trimCols: true,
-  maxColWidth: '18em',
-  textNormal: 16,
-  textSmall: 13,
-  imgGrid: false,
-  imgWidth: 'img-default-width',
-  tableWidth: 'table-default-width',
-  iframeWidth: 'iframe-default-width',
-  minimalIcons: true,
-  fancyCursor: true,
-  trimNames: true,
-  labeledNav: false,
-  fullWidthMedia: true,
-  bordersToggle: true,
-  bordersTitle: false,
-  minimalStatus: true,
-  focusMode: false,
-  underlineInternal: true,
-  underlineExternal: true,
-  useSystemTheme: false,
-  folding: false,
-  relationLinesPreview: false,
-  relationLinesEdit: false
+  scheme: 'you-default'
 }
 
 class YouSettingTab extends PluginSettingTab {
