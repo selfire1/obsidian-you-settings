@@ -76,23 +76,22 @@ export default class YouTheme extends Plugin {
     }
   }
 
-  updateDarkStyle() {
-    document.body.removeClass('theme-light','minimal-dark','minimal-dark-tonal','minimal-dark-black');
+  updateScheme() {
+    document.body.removeClass("you-default", "you-forest", "you-coral");
     document.body.addClass(this.settings.darkStyle);
     // @ts-ignore
     this.app.setTheme('obsidian');
-    // @ts-ignore
-    this.app.vault.setConfig('theme', 'obsidian');
-    this.app.workspace.trigger('css-change');
-  }
-
-  updateLightStyle() {
-    document.body.removeClass('theme-dark','you-default','you-forest','you-coral','minimal-light-white');
-    document.body.addClass(this.settings.lightStyle);
-    // @ts-ignore
-    this.app.setTheme('moonstone');
-    // @ts-ignore
-    this.app.vault.setConfig('theme', 'moonstone');
+	let media = window.matchMedia("(prefers-color-scheme: dark)");
+	if (media.matches && this.settings.useSystemTheme) {
+		// Dark Mode
+		// @ts-ignore
+		this.app.vault.setConfig('theme', 'obsidian');
+	} else if (this.settings.useSystemTheme) {
+		// Light Mode
+		// @ts-ignore
+		this.app.vault.setConfig('theme', 'moonstone');
+	}
+	// @ts-ignore
     this.app.workspace.trigger('css-change');
   }
 
