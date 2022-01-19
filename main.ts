@@ -17,7 +17,7 @@ export default class YouTheme extends Plugin {
 }
 
   onunload() {
-    console.log('Unloading Minimal Theme Settings plugin');
+    console.log('Unloading Obsidian You Settings plugin');
   }
 
   async loadSettings() {
@@ -51,29 +51,7 @@ export default class YouTheme extends Plugin {
   // update the styles (at the start, or as the result of a settings change)
   updateStyle() {
     this.removeStyle();
-    document.body.classList.toggle('borders-none', !this.settings.bordersToggle);
-    document.body.classList.toggle('borders-title', this.settings.bordersTitle);
-    document.body.classList.toggle('fancy-cursor', this.settings.fancyCursor);
-    document.body.classList.toggle('minimal-focus-mode', this.settings.focusMode);
-    document.body.classList.toggle('links-int-on', this.settings.underlineInternal);
-    document.body.classList.toggle('links-ext-on', this.settings.underlineExternal);
-    document.body.classList.toggle('system-shade', this.settings.useSystemTheme);
-    document.body.classList.toggle('full-width-media', this.settings.fullWidthMedia);
-    document.body.classList.toggle('img-grid', this.settings.imgGrid);
-    document.body.classList.toggle('minimal-status-off', !this.settings.minimalStatus);
-    document.body.classList.toggle('full-file-names', !this.settings.trimNames);
-    document.body.classList.toggle('labeled-nav', this.settings.labeledNav);
-    document.body.classList.toggle('trim-cols', this.settings.trimCols);
-    document.body.classList.toggle('minimal-icons-off', !this.settings.minimalIcons);
-    document.body.classList.toggle('minimal-folding', this.settings.folding);
-    document.body.classList.toggle('minimal-rel-edit', this.settings.relationLinesEdit);
-    document.body.classList.toggle('minimal-rel-preview', this.settings.relationLinesPreview);
-
-    document.body.removeClass('table-wide','table-max','table-100','table-default-width','iframe-wide','iframe-max','iframe-100','iframe-default-width','img-wide','img-max','img-100','img-default-width');
-    document.body.addClass(this.settings.tableWidth);
-    document.body.addClass(this.settings.imgWidth);
-    document.body.addClass(this.settings.iframeWidth);
-
+    
     // get the custom css element
     const el = document.getElementById('obsidian-you-theme');
     if (!el) throw "obsidian-you-theme element not found!";
