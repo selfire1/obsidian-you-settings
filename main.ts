@@ -11,7 +11,7 @@ export default class YouTheme extends Plugin {
 
   this.addStyle();
 
-  const lightStyles = ['minimal-light', 'minimal-light-tonal', 'minimal-light-contrast', 'minimal-light-white'];
+  const lightStyles = ['you-default', 'you-forest', 'you-coral', 'minimal-light-white'];
   const darkStyles = ['minimal-dark', 'minimal-dark-tonal', 'minimal-dark-black'];
   const imgGridStyles = ['img-grid','img-grid-ratio','img-nogrid'];
   const tableWidthStyles = ['table-100','table-default-width','table-wide','table-max'];
@@ -126,7 +126,7 @@ export default class YouTheme extends Plugin {
   }
 
   updateLightStyle() {
-    document.body.removeClass('theme-dark','minimal-light','minimal-light-tonal','minimal-light-contrast','minimal-light-white');
+    document.body.removeClass('theme-dark','you-default','you-forest','you-coral','minimal-light-white');
     document.body.addClass(this.settings.lightStyle);
     // @ts-ignore
     this.app.setTheme('moonstone');
@@ -144,7 +144,7 @@ export default class YouTheme extends Plugin {
   }
 
   removeStyle() {
-    document.body.removeClass('minimal-light','minimal-light-tonal','minimal-light-contrast','minimal-light-white','minimal-dark','minimal-dark-tonal','minimal-dark-black');
+    document.body.removeClass('you-default','you-forest','you-coral','minimal-light-white','minimal-dark','minimal-dark-tonal','minimal-dark-black');
     document.body.addClass(this.settings.lightStyle,this.settings.darkStyle);
   }
 
@@ -192,7 +192,7 @@ const DEFAULT_SETTINGS: YouSettings = {
   theme: 'moonstone',
   accentHue: 201,
   accentSat: 17,
-  lightStyle: 'minimal-light',
+  lightStyle: 'you-default',
   darkStyle: 'minimal-dark',
   uiFont: '-apple-system,BlinkMacSystemFont,"Segoe UI Emoji","Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,sans-serif',
   textFont: '-apple-system,BlinkMacSystemFont,"Segoe UI Emoji","Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,sans-serif',
@@ -273,10 +273,10 @@ class YouSettingTab extends PluginSettingTab {
         .setName('Light mode style')
         .setDesc('Background colors in light mode')
         .addDropdown(dropdown => dropdown
-          .addOption('minimal-light','Default')
+          .addOption('you-default','Default')
           .addOption('minimal-light-white','All white')
-          .addOption('minimal-light-tonal','Low contrast')
-          .addOption('minimal-light-contrast','High contrast')
+          .addOption('you-forest','Low contrast')
+          .addOption('you-coral','High contrast')
           .setValue(this.plugin.settings.lightStyle)
         .onChange((value) => {
           this.plugin.settings.lightStyle = value;
