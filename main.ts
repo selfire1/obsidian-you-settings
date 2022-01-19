@@ -140,40 +140,15 @@ class YouSettingTab extends PluginSettingTab {
 
 
       new Setting(containerEl)
-        .setName('Accent color hue')
-        .setDesc('For links and interactive elements')
-        .addSlider(slider => slider
-            .setLimits(0, 360, 1)
-            .setValue(this.plugin.settings.accentHue)
-          .onChange((value) => {
-            this.plugin.settings.accentHue = value;
-            this.plugin.saveData(this.plugin.settings);
-            this.plugin.refresh();
-          }));
-
-      new Setting(containerEl)
-        .setName('Accent color saturation')
-        .setDesc('For links and interactive elements')
-        .addSlider(slider => slider
-            .setLimits(0, 100, 1)
-            .setValue(this.plugin.settings.accentSat)
-          .onChange((value) => {
-            this.plugin.settings.accentSat = value;
-            this.plugin.saveData(this.plugin.settings);
-            this.plugin.refresh();
-          }));
-
-      new Setting(containerEl)
-        .setName('Light mode style')
-        .setDesc('Background colors in light mode')
+        .setName('Colour scheme')
+        .setDesc('Select your colour scheme')
         .addDropdown(dropdown => dropdown
           .addOption('you-default','Default')
-          .addOption('minimal-light-white','All white')
-          .addOption('you-forest','Low contrast')
-          .addOption('you-coral','High contrast')
-          .setValue(this.plugin.settings.lightStyle)
+          .addOption('you-forest','Forest')
+          .addOption('you-coral','Coral')
+          .setValue(this.plugin.settings.scheme)
         .onChange((value) => {
-          this.plugin.settings.lightStyle = value;
+          this.plugin.settings.scheme = value;
           this.plugin.saveData(this.plugin.settings);
           this.plugin.removeStyle();
         }));
