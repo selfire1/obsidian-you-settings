@@ -43,11 +43,11 @@ export default class YouTheme extends Plugin {
   addStyle() {
     // add a css block for our settings-dependent styles
     const css = document.createElement('style');
-    css.id = 'minimal-theme';
+    css.id = 'obsidian-you-theme';
     document.getElementsByTagName("head")[0].appendChild(css);
 
     // add the main class
-    document.body.classList.add('minimal-theme');
+    document.body.classList.add('obsidian-you-theme');
 
     // update the style with the settings-dependent styles
     this.updateStyle();
@@ -80,12 +80,12 @@ export default class YouTheme extends Plugin {
     document.body.addClass(this.settings.iframeWidth);
 
     // get the custom css element
-    const el = document.getElementById('minimal-theme');
-    if (!el) throw "minimal-theme element not found!";
+    const el = document.getElementById('obsidian-you-theme');
+    if (!el) throw "obsidian-you-theme element not found!";
     else {
       // set the settings-dependent css
       el.innerText = `
-        body.minimal-theme{
+        body.obsidian-you-theme{
           --font-normal:${this.settings.textNormal}px;
           --font-small:${this.settings.textSmall}px;
           --line-width:${this.settings.lineWidth}rem;
