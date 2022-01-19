@@ -11,12 +11,7 @@ export default class YouTheme extends Plugin {
 
   this.addStyle();
 
-  const lightStyles = ['you-default', 'you-forest', 'you-coral', 'minimal-light-white'];
-  const darkStyles = ['minimal-dark', 'minimal-dark-tonal', 'minimal-dark-black'];
-  const imgGridStyles = ['img-grid','img-grid-ratio','img-nogrid'];
-  const tableWidthStyles = ['table-100','table-default-width','table-wide','table-max'];
-  const iframeWidthStyles = ['iframe-100','iframe-default-width','iframe-wide','iframe-max'];
-  const imgWidthStyles = ['img-100','img-default-width','img-wide','img-max'];
+  const colourPalettes = ['you-default', 'you-forest', 'you-coral', 'minimal-light-white'];
   const theme = ['moonstone', 'obsidian'];
 
 }
