@@ -57,6 +57,7 @@ export default class YouTheme extends Plugin {
     if (!el) throw "obsidian-you-theme element not found!";
     else {
       // set the settings-dependent css
+	//   WIP Update this
       el.innerText = `
         body.obsidian-you-theme{
           --font-normal:${this.settings.textNormal}px;
@@ -73,19 +74,6 @@ export default class YouTheme extends Plugin {
           --accent-s:${this.settings.accentSat}%;}
       `;
     }
-  }
-
-  refreshSystemTheme() {
-    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-
-    if (isDarkMode && this.settings.useSystemTheme) {
-        console.log('Dark mode active');
-        this.updateDarkStyle()
-
-      } else if (this.settings.useSystemTheme) {
-        console.log('Light mode active');
-        this.updateLightStyle()
-      }
   }
 
   updateDarkStyle() {
@@ -282,7 +270,6 @@ class YouSettingTab extends PluginSettingTab {
           .onChange((value) => {
             this.plugin.settings.useSystemTheme = value;
             this.plugin.saveData(this.plugin.settings);
-            this.plugin.refreshSystemTheme();
             })
           );
 
