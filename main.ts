@@ -1,13 +1,13 @@
 import { App, Workspace, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
 
-export default class MinimalTheme extends Plugin {
-  settings: MinimalSettings;
+export default class YouTheme extends Plugin {
+  settings: YouSettings;
 
   async onload() {
 
   await this.loadSettings();
 
-  this.addSettingTab(new MinimalSettingTab(this.app, this));
+  this.addSettingTab(new YouSettingTab(this.app, this));
 
   this.addStyle();
 
@@ -353,7 +353,7 @@ export default class MinimalTheme extends Plugin {
 
 }
 
-interface MinimalSettings {
+interface YouSettings {
   theme: string;
   accentHue: number;
   accentSat: number;
@@ -391,7 +391,7 @@ interface MinimalSettings {
   relationLinesEdit: boolean;
 }
 
-const DEFAULT_SETTINGS: MinimalSettings = {
+const DEFAULT_SETTINGS: YouSettings = {
   theme: 'moonstone',
   accentHue: 201,
   accentSat: 17,
@@ -429,11 +429,11 @@ const DEFAULT_SETTINGS: MinimalSettings = {
   relationLinesEdit: false
 }
 
-class MinimalSettingTab extends PluginSettingTab {
+class YouSettingTab extends PluginSettingTab {
 
 
-  plugin: MinimalTheme;
-  constructor(app: App, plugin: MinimalTheme) {
+  plugin: YouTheme;
+  constructor(app: App, plugin: YouTheme) {
     super(app, plugin);
     this.plugin = plugin;
   }
