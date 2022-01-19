@@ -104,7 +104,7 @@ export default class YouTheme extends Plugin {
   }
 
   removeStyle() {
-    document.body.removeClass('you-default','you-forest','you-coral','minimal-light-white','minimal-dark','minimal-dark-tonal','minimal-dark-black');
+    document.body.removeClass('you-default','you-forest','you-coral');
     document.body.addClass(this.settings.lightStyle,this.settings.darkStyle);
   }
 
