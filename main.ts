@@ -102,11 +102,13 @@ export default class YouTheme extends Plugin {
 interface YouSettings {
   theme: string;
   scheme: string;
+  input: string;
 }
 
 const DEFAULT_SETTINGS: YouSettings = {
   theme: 'moonstone',
-  scheme: 'you-default'
+  scheme: 'you-default',
+  input: ''
 }
 
 class YouSettingTab extends PluginSettingTab {
@@ -148,15 +150,18 @@ class YouSettingTab extends PluginSettingTab {
     containerEl.createEl('p', {text: 'Overrides the dropdowns above. Use the exact name of the font as it appears on your system.'});
 
     new Setting(containerEl)
-      .setName('Custom text font')
-      .setDesc('Used in preview mode')
-      .addText(text => text.setPlaceholder('')
-        .setValue((this.plugin.settings.textFont || '') + '')
-        .onChange((value) => {
-          this.plugin.settings.textFont = value;
-          this.plugin.saveData(this.plugin.settings);
-          this.plugin.refresh();
-        }));
+		.setName("Custom text font")
+		.setDesc("Used in preview mode")
+		.addText((text) =>
+			text
+				.setPlaceholder("")
+				.setValue(this.plugin.settings.input)
+				.onChange((value) => {
+					this.plugin.settings.input = value;
+					this.plugin.saveData(this.plugin.settings);
+					this.plugin.refresh();
+				})
+		);
 
     containerEl.createEl('br');
     containerEl.createEl('h3', {text: 'Support development'});
