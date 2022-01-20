@@ -124,9 +124,8 @@ class YouSettingTab extends PluginSettingTab {
     let {containerEl} = this;
 
     containerEl.empty();
-    containerEl.createEl('h3', {text: 'Minimal Theme Settings'});
-    containerEl.createEl('p', {text: 'If you notice any issues, update to the latest version of Minimal Theme and reload Obsidian. Download the Hider plugin for additional options to further simplify the Obsidian UI.'});
-    containerEl.createEl('a', {text: '⬤ Accent color'});
+    containerEl.createEl('h3', {text: 'Obsidian You Theme Settings'});
+    containerEl.createEl('p', {text: 'If you notice any issues, update to the latest version of Obsidian You Theme and reload Obsidian.'});
     containerEl.createEl('h3');
 
 
@@ -146,12 +145,12 @@ class YouSettingTab extends PluginSettingTab {
 
     containerEl.createEl('br');
     containerEl.createEl('h3');
-    containerEl.createEl('h3', {text: 'Custom fonts'});
-    containerEl.createEl('p', {text: 'Overrides the dropdowns above. Use the exact name of the font as it appears on your system.'});
+    containerEl.createEl('h3', {text: 'Custom Colour Scheme'});
+    containerEl.createEl('p', {text: 'Paste the content of the tokens.json file.'});
 
     new Setting(containerEl)
-		.setName("Custom text font")
-		.setDesc("Used in preview mode")
+		.setName("Custom colour scheme")
+		.setDesc("Paste the content of the tokens.json file")
 		.addText((text) =>
 			text
 				.setPlaceholder("")
@@ -172,7 +171,7 @@ class YouSettingTab extends PluginSettingTab {
 
     const donateText = document.createElement('p');
     donateText.appendText(
-      'If you enjoy Minimal Theme, consider supporting its development using the links below:',
+      'If you enjoy the Obsidian You Theme, consider supporting its development using the links below:',
     );
     div.appendChild(donateText);
 
