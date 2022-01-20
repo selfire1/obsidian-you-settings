@@ -71,11 +71,11 @@ export default class YouTheme extends Plugin {
     // @ts-ignore
     this.app.setTheme('obsidian');
 	let media = window.matchMedia("(prefers-color-scheme: dark)");
-	if (media.matches && this.settings.useSystemTheme) {
+	if (media.matches) {
 		// Dark Mode
 		// @ts-ignore
 		this.app.vault.setConfig('theme', 'obsidian');
-	} else if (this.settings.useSystemTheme) {
+	} else {
 		// Light Mode
 		// @ts-ignore
 		this.app.vault.setConfig('theme', 'moonstone');
