@@ -69,16 +69,15 @@ export default class YouTheme extends Plugin {
     document.body.removeClass("you-default", "you-forest", "you-coral");
     document.body.addClass(this.settings.scheme);
     // @ts-ignore
-    this.app.setTheme('obsidian');
 	let media = window.matchMedia("(prefers-color-scheme: dark)");
 	if (media.matches) {
 		// Dark Mode
 		// @ts-ignore
-		this.app.vault.setConfig('theme', 'obsidian');
+		this.app.changeTheme("obsidian");
 	} else {
 		// Light Mode
 		// @ts-ignore
-		this.app.vault.setConfig('theme', 'moonstone');
+		    this.app.changeTheme("moonstone");
 	}
 	// @ts-ignore
     this.app.workspace.trigger('css-change');
@@ -86,9 +85,8 @@ export default class YouTheme extends Plugin {
 
   updateTheme() {
     // @ts-ignore
-    this.app.setTheme(this.settings.theme);
     // @ts-ignore
-    this.app.vault.setConfig('theme', this.settings.theme);
+	this.app.changeTheme("obsidian");
     this.app.workspace.trigger('css-change');
   }
 
