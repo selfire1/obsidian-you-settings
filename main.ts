@@ -77,16 +77,9 @@ export default class YouTheme extends Plugin {
 	} else {
 		// Light Mode
 		// @ts-ignore
-		    this.app.changeTheme("moonstone");
+		this.app.changeTheme("moonstone");
 	}
 	// @ts-ignore
-    this.app.workspace.trigger('css-change');
-  }
-
-  updateTheme() {
-    // @ts-ignore
-    // @ts-ignore
-	this.app.changeTheme("obsidian");
     this.app.workspace.trigger('css-change');
   }
 
