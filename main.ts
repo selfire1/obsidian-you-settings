@@ -145,11 +145,12 @@ class YouSettingTab extends PluginSettingTab {
 		.addText((text) =>
 			text
 				.setPlaceholder("")
-				.setValue(this.plugin.settings.input)
+				.setValue(JSON.parse(this.plugin.settings.input))
 				.onChange((value) => {
 					this.plugin.settings.input = value;
 					this.plugin.saveData(this.plugin.settings);
 					this.plugin.refresh();
+					console.log(JSON.parse(value));
 				})
 		);
 
