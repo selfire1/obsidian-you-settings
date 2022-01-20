@@ -11,7 +11,7 @@ export default class YouTheme extends Plugin {
 
   this.addStyle();
 
-  const colourPalettes = ['you-default', 'you-forest', 'you-coral', 'minimal-light-white'];
+  const colourPalettes = ['you-default', 'you-forest', 'you-coral'];
   const theme = ['moonstone', 'obsidian'];
 
 }
@@ -166,7 +166,7 @@ class YouSettingTab extends PluginSettingTab {
     containerEl.createEl('h3', {text: 'Support development'});
 
     const div = containerEl.createEl('div', {
-      cls: 'minimal-donation',
+      cls: 'you-donation',
     });
 
     const donateText = document.createElement('p');
@@ -194,7 +194,7 @@ class YouSettingTab extends PluginSettingTab {
 const createDonateButton = (link: string, img: HTMLElement): HTMLElement => {
   const a = document.createElement('a');
   a.setAttribute('href', link);
-  a.addClass('minimal-donate-button');
+  a.addClass('you-donate-button');
   a.appendChild(img);
   return a;
 };
