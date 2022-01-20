@@ -170,22 +170,20 @@ class YouSettingTab extends PluginSettingTab {
     });
 
     const donateText = document.createElement('p');
-    donateText.appendText(
-      'If you enjoy the Obsidian You Theme, consider supporting its development using the links below:',
-    );
+    donateText.appendText("You can help me keep creating tools like this by supporting the development.");
     div.appendChild(donateText);
 
     const parser = new DOMParser();
     div.appendChild(
-      createDonateButton(
-        'https://www.buymeacoffee.com/kepano',
-        parser.parseFromString(buyMeACoffee, 'text/xml').documentElement,
-      ),
-    );
+		createDonateButton(
+			"https://www.buymeacoffee.com/joschua",
+			parser.parseFromString(buyMeACoffee, "text/xml").documentElement
+		)
+	);
 
     div.appendChild(
       createDonateButton(
-        'https://www.patreon.com/bePatron?u=499711',
+        'https://www.patreon.com/joschua',
         parser.parseFromString(patreon, 'text/xml').documentElement,
       ),
     );
