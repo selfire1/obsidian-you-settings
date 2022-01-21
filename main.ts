@@ -51,7 +51,7 @@ export default class YouTheme extends Plugin {
   // update the styles (at the start, or as the result of a settings change)
   updateStyle() {
     this.removeStyle();
-    
+
     // get the custom css element
     const el = document.getElementById('obsidian-you-theme');
     if (!el) throw "obsidian-you-theme element not found!";
@@ -60,10 +60,20 @@ export default class YouTheme extends Plugin {
 	//   WIP Update this
       el.innerText = `
         body.obsidian-you-theme{
-          --scheme:${this.settings.scheme};
+          --primary:${primary};
       `;
     }
   }
+
+parseInput(obj: { entities: { value: any; }[]; }) {
+ var arr = [];
+ var length = 24;
+
+ for (let i = 0; i < length; i++) {
+   arr.push(obj.entities[0].value);
+ }
+ return arr;
+}
 
   updateScheme() {
     document.body.removeClass("you-default", "you-forest", "you-coral");
