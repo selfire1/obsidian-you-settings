@@ -52,15 +52,41 @@ export default class YouTheme extends Plugin {
   updateStyle() {
     this.removeStyle();
 
+    const obj = JSON.parse(this.settings.input);
+	  const schemeArr = this.parseInput(obj);
+    
     // get the custom css element
     const el = document.getElementById('obsidian-you-theme');
     if (!el) throw "obsidian-you-theme element not found!";
     else {
       // set the settings-dependent css
-	//   WIP Update this
       el.innerText = `
         body.obsidian-you-theme{
-          --primary:${primary};
+      --primary: ${schemeArr[0]};
+      --on-primary: ${schemeArr[1]};
+      --primary-container: ${schemeArr[2]};
+      --on-primary-container: ${schemeArr[3]};
+      --secondary: ${schemeArr[4]};
+      --on-secondary: ${schemeArr[5]};
+      --secondary-container: ${schemeArr[6]};
+      --on-secondary-container: ${schemeArr[7]};
+      --tertiary: ${schemeArr[8]};
+      --on-tertiary: ${schemeArr[9]};
+      --tertiary-container: ${schemeArr[10]};
+      --on-tertiary-container: ${schemeArr[11]};
+      --error: ${schemeArr[12]};
+      --error-container: ${schemeArr[13]};
+      --on-error: ${schemeArr[14]};
+      --on-error-container: ${schemeArr[15]};
+      --background: ${schemeArr[16]};
+      --on-background: ${schemeArr[17]};
+      --surface: ${schemeArr[18]};
+      --on-surface: ${schemeArr[19]};
+      --surface-variant: ${schemeArr[20]};
+      --on-surface-variant: ${schemeArr[21]};
+      --outline: ${schemeArr[22]};
+      --inverse-on-surface: ${schemeArr[23]};
+      --inverse-surface: ${schemeArr[24]};
       `;
     }
   }
