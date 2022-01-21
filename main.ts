@@ -1,66 +1,64 @@
 import { App, Workspace, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
 
 export default class YouTheme extends Plugin {
-  settings: YouSettings;
+	settings: YouSettings;
 
-  async onload() {
+	async onload() {
+		await this.loadSettings();
 
-  await this.loadSettings();
+		this.addSettingTab(new YouSettingTab(this.app, this));
 
-  this.addSettingTab(new YouSettingTab(this.app, this));
+		this.addStyle();
 
-  this.addStyle();
+		const colourPalettes = ["you-default", "you-forest", "you-coral"];
+		const theme = ["moonstone", "obsidian"];
+	}
 
-  const colourPalettes = ['you-default', 'you-forest', 'you-coral'];
-  const theme = ['moonstone', 'obsidian'];
+	onunload() {
+		console.log("Unloading Obsidian You Settings plugin");
+	}
 
-}
+	async loadSettings() {
+		this.settings = Object.assign(DEFAULT_SETTINGS, await this.loadData());
+	}
 
-  onunload() {
-    console.log('Unloading Obsidian You Settings plugin');
-  }
+	async saveSettings() {
+		await this.saveData(this.settings);
+	}
 
-  async loadSettings() {
-    this.settings = Object.assign(DEFAULT_SETTINGS, await this.loadData());
-  }
+	// refresh function for when we change settings
+	refresh() {
+		// re-load the style
+		this.updateStyle();
+	}
 
-  async saveSettings() {
-    await this.saveData(this.settings);
-  }
+	// add the styling elements we need
+	addStyle() {
+		// add a css block for our settings-dependent styles
+		const css = document.createElement("style");
+		css.id = "obsidian-you-theme";
+		document.getElementsByTagName("head")[0].appendChild(css);
 
-  // refresh function for when we change settings
-  refresh() {
-    // re-load the style
-    this.updateStyle()
-  }
+		// add the main class
+		document.body.classList.add("obsidian-you-theme");
 
-  // add the styling elements we need
-  addStyle() {
-    // add a css block for our settings-dependent styles
-    const css = document.createElement('style');
-    css.id = 'obsidian-you-theme';
-    document.getElementsByTagName("head")[0].appendChild(css);
+		// update the style with the settings-dependent styles
+		this.updateStyle();
+	}
 
-    // add the main class
-    document.body.classList.add('obsidian-you-theme');
+	// update the styles (at the start, or as the result of a settings change)
+	updateStyle() {
+		this.removeStyle();
 
-    // update the style with the settings-dependent styles
-    this.updateStyle();
-  }
+		const obj = JSON.parse(this.settings.input);
+		const schemeArr = this.parseInput(obj);
 
-  // update the styles (at the start, or as the result of a settings change)
-  updateStyle() {
-    this.removeStyle();
-
-    const obj = JSON.parse(this.settings.input);
-	  const schemeArr = this.parseInput(obj);
-    
-    // get the custom css element
-    const el = document.getElementById('obsidian-you-theme');
-    if (!el) throw "obsidian-you-theme element not found!";
-    else {
-      // set the settings-dependent css
-      el.innerText = `
+		// get the custom css element
+		const el = document.getElementById("obsidian-you-theme");
+		if (!el) throw "obsidian-you-theme element not found!";
+		else {
+			// set the settings-dependent css
+			el.innerText = `
       body.obsidian-you-theme{
         --primary: ${schemeArr[0]};
         --on-primary: ${schemeArr[1]};
@@ -88,42 +86,54 @@ export default class YouTheme extends Plugin {
         --inverse-on-surface: ${schemeArr[23]};
         --inverse-surface: ${schemeArr[24]};
       `;
-    }
-  }
-
-parseInput(obj: { entities: { value: any; }[]; }) {
- var arr = [];
- var length = 24;
-
- for (let i = 0; i < length; i++) {
-   arr.push(obj.entities[i].value);
- }
- return arr;
-}
-
-  updateScheme() {
-    document.body.removeClass("you-default", "you-forest", "you-coral");
-    document.body.addClass(this.settings.scheme);
-    // @ts-ignore
-	let media = window.matchMedia("(prefers-color-scheme: dark)");
-	if (media.matches) {
-		// Dark Mode
-		// @ts-ignore
-		this.app.changeTheme("obsidian");
-	} else {
-		// Light Mode
-		// @ts-ignore
-		this.app.changeTheme("moonstone");
+		}
 	}
-	// @ts-ignore
-    this.app.workspace.trigger('css-change');
-  }
 
-  removeStyle() {
-    document.body.removeClass('you-default','you-forest','you-coral');
-    document.body.addClass(this.settings.scheme);
-  }
+	parseInput(obj: { entities: { value: any }[] }) {
+		var arr = [];
+		var length = 24;
 
+		for (let i = 0; i < length; i++) {
+			arr.push(obj.entities[i].value);
+		}
+		return arr;
+	}
+
+	// Source: https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+	hexToRgb(hex: string) {
+		var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+		return result
+			? {
+					r: parseInt(result[1], 16),
+					g: parseInt(result[2], 16),
+					b: parseInt(result[3], 16),
+			  }
+			: null;
+		// hexToRgb("#0033ff").g; // "51";
+	}
+
+	updateScheme() {
+		document.body.removeClass("you-default", "you-forest", "you-coral");
+		document.body.addClass(this.settings.scheme);
+		// @ts-ignore
+		let media = window.matchMedia("(prefers-color-scheme: dark)");
+		if (media.matches) {
+			// Dark Mode
+			// @ts-ignore
+			this.app.changeTheme("obsidian");
+		} else {
+			// Light Mode
+			// @ts-ignore
+			this.app.changeTheme("moonstone");
+		}
+		// @ts-ignore
+		this.app.workspace.trigger("css-change");
+	}
+
+	removeStyle() {
+		document.body.removeClass("you-default", "you-forest", "you-coral");
+		document.body.addClass(this.settings.scheme);
+	}
 }
 
 interface YouSettings {
