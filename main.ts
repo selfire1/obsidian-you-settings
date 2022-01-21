@@ -96,7 +96,7 @@ parseInput(obj: { entities: { value: any; }[]; }) {
  var length = 24;
 
  for (let i = 0; i < length; i++) {
-   arr.push(obj.entities[0].value);
+   arr.push(obj.entities[i].value);
  }
  return arr;
 }
