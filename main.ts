@@ -105,7 +105,7 @@ export default class YouTheme extends Plugin {
 
 	parseInput(obj: { entities: { value: any }[] }) {
 		var arr = [];
-		var length = 24;
+		var length = 25;
 
 		for (let i = 0; i < length; i++) {
 			arr.push(obj.entities[i].value);
