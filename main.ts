@@ -53,6 +53,15 @@ export default class YouTheme extends Plugin {
 		const obj = JSON.parse(this.settings.input);
 		const schemeArr = this.parseInput(obj);
 
+    // Calculating surface elevation variables
+    const primaryArr = this.hexToRgb(schemeArr[0]);
+    const surfaceArr = this.hexToRgb(schemeArr[18]);
+    const surface1 = `rgb(${this.mixRgb(1, primaryArr, surfaceArr)})`;
+    const surface2 = `rgb(${this.mixRgb(2, primaryArr, surfaceArr)})`;
+    const surface3 = `rgb(${this.mixRgb(3, primaryArr, surfaceArr)})`;
+    const surface4 = `rgb(${this.mixRgb(4, primaryArr, surfaceArr)})`;
+    const surface5 = `rgb(${this.mixRgb(5, primaryArr, surfaceArr)})`;
+
 		// get the custom css element
 		const el = document.getElementById("obsidian-you-theme");
 		if (!el) throw "obsidian-you-theme element not found!";
@@ -85,6 +94,11 @@ export default class YouTheme extends Plugin {
         --outline: ${schemeArr[22]};
         --inverse-on-surface: ${schemeArr[23]};
         --inverse-surface: ${schemeArr[24]};
+        --surface1: ${surface1};
+        --surface2: ${surface2};
+        --surface3: ${surface3};
+        --surface4: ${surface4};
+        --surface5: ${surface5};
       `;
 		}
 	}
@@ -98,6 +112,38 @@ export default class YouTheme extends Plugin {
 		}
 		return arr;
 	}
+
+  mixRgb(elevationLevel:number,base: { r: number; g: number; b: number; },secondary: { r: number; g: number; b: number; }) {
+  var elevation:number;
+
+  switch (elevationLevel) {
+    case 1:
+      elevation = 0.05;
+      break;
+    case 2:
+      elevation = 0.08;
+      break;
+    case 3:
+      elevation = 0.12;
+      break;
+    case 4:
+      elevation = 0.12;
+      break;
+    case 5:
+      elevation = 0.14;
+      break;
+      
+      default:
+      elevation = 0;
+      break;
+  }
+
+  const outputR = Math.round(base.r * elevation + secondary.r * (1 - elevation));
+  const outputG = Math.round(base.g * elevation + secondary.g * (1 - elevation));
+  const outputB = Math.round(base.b * elevation + secondary.b * (1 - elevation));
+
+  return `${outputR},${outputG},${outputB}`;
+  }
 
 	// Source: https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
 	hexToRgb(hex: string) {
