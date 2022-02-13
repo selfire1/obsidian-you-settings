@@ -1,4 +1,12 @@
-import { App, Workspace, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import {
+	App,
+	Workspace,
+	Modal,
+	Notice,
+	Plugin,
+	PluginSettingTab,
+	Setting,
+} from "obsidian";
 
 export default class YouTheme extends Plugin {
 	settings: YouSettings;
@@ -49,77 +57,161 @@ export default class YouTheme extends Plugin {
 	// update the styles (at the start, or as the result of a settings change)
 	updateStyle() {
 		this.removeStyle();
-    // Default theme: no theme specified
-    var schemeArr = ["#5F4BBD", "#FFFFFF", "#E7DEFF", "#1A0064", "#605C71", "#FFFFFF", "#E6DFF9", "#1C192C", "#7C5264", "#FFFFFF", "#FFD9E8", "#301020", "#BA1B1B", "#FFDAD4", "#FFFFFF", "#410001", "#FFFBFF", "#1C1B1E", "#FFFBFF", "#FFFBFF", "#1C1B1E", "#E5E0EB", "#48454F", "#79767F", "#F4EFF4", "#313033", "#CABEFF", "#CABEFF", "#30128D", "#4731A4", "#E7DEFF", "#C9C3DC", "#312E41", "#484459", "#E6DFF9", "#EDB8CD", "#482535", "#623B4C", "#FFD9E8", "#FFB4A9", "#930006", "#680003", "#FFDAD4", "#1C1B1E", "#E5E1E5", "#1C1B1E", "#E5E1E5", "#48454F", "#C9C4D0", "#938F99", "#1C1B1E", "#E5E1E5", "#5F4BBD"];
-    // Calculating surface elevation variables - Light
-    var lightPrimaryArr = this.hexToRgb(schemeArr[0]);
-    var lightSurfaceArr = this.hexToRgb(schemeArr[18]);
-    var lightSurface1 = `rgb(${this.mixRgb(1, lightPrimaryArr, lightSurfaceArr)})`;
-    var lightSurface2 = `rgb(${this.mixRgb(2, lightPrimaryArr, lightSurfaceArr)})`;
-    var lightSurface3 = `rgb(${this.mixRgb(3, lightPrimaryArr, lightSurfaceArr)})`;
-    var lightSurface4 = `rgb(${this.mixRgb(4, lightPrimaryArr, lightSurfaceArr)})`;
-    var lightSurface5 = `rgb(${this.mixRgb(5, lightPrimaryArr, lightSurfaceArr)})`;
+		if ((this.settings.theme = "custom")) {
+			this.addCustomTheme();
+		} else {
+			document.body.addClass(this.settings.scheme);
+		}
+		// // @ts-ignore
+		// this.app.setTheme("moonstone");
+		// // @ts-ignore
+		// this.app.vault.setConfig("theme", "moonstone");
+		this.app.workspace.trigger("css-change");
+	}
 
-    // Calculating surface elevation variables - Dark
-    var darkPrimaryArr = this.hexToRgb(schemeArr[25]);
-    var darkSurfaceArr = this.hexToRgb(schemeArr[43]);
-    var darkSurface1 = `rgb(${this.mixRgb(1, darkPrimaryArr, darkSurfaceArr)})`;
-    var darkSurface2 = `rgb(${this.mixRgb(2, darkPrimaryArr, darkSurfaceArr)})`;
-    var darkSurface3 = `rgb(${this.mixRgb(3, darkPrimaryArr, darkSurfaceArr)})`;
-    var darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
-    var darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
+	parseInput(obj: { entities: { value: any }[] }) {
+		var arr = [];
+		var length = 50;
 
-    if (this.settings.scheme = "custom") {
-    const obj = JSON.parse(this.settings.input);
-    schemeArr = this.parseInput(obj);
-  
-    // Calculating surface elevation variables - Light
-    lightPrimaryArr = this.hexToRgb(schemeArr[0]);
-    lightSurfaceArr = this.hexToRgb(schemeArr[18]);
-    lightSurface1 = `rgb(${this.mixRgb(1, lightPrimaryArr, lightSurfaceArr)})`;
-    lightSurface2 = `rgb(${this.mixRgb(2, lightPrimaryArr, lightSurfaceArr)})`;
-    lightSurface3 = `rgb(${this.mixRgb(3, lightPrimaryArr, lightSurfaceArr)})`;
-    lightSurface4 = `rgb(${this.mixRgb(4, lightPrimaryArr, lightSurfaceArr)})`;
-    lightSurface5 = `rgb(${this.mixRgb(5, lightPrimaryArr, lightSurfaceArr)})`;
-    
-    // Calculating surface elevation variables - Dark
-    darkPrimaryArr = this.hexToRgb(schemeArr[25]);
-    darkSurfaceArr = this.hexToRgb(schemeArr[43]);
-    darkSurface1 = `rgb(${this.mixRgb(1, darkPrimaryArr, darkSurfaceArr)})`;
-    darkSurface2 = `rgb(${this.mixRgb(2, darkPrimaryArr, darkSurfaceArr)})`;
-    darkSurface3 = `rgb(${this.mixRgb(3, darkPrimaryArr, darkSurfaceArr)})`;
-    darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
-    darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
+		for (let i = 0; i < length; i++) {
+			arr.push(obj.entities[i].value);
+		}
+		return arr;
+	}
 
-    } else if (this.settings.scheme = "old-diary") {
-    schemeArr = ["#af2b44", "#ffffff", "#ffdadd", "#40000d", "#365ca8", "#ffffff", "#d8e2ff", "#001947", "#285ea7", "#ffffff", "#d5e3ff", "#001b3f", "#ba1b1b", "#ffffff", "#ffdad4", "#410001", "#857374", "#fcfcfc", "#201a1a", "#fcfcfc", "#201a1a", "#f4ddde", "#534344", "#362f2f", "#fbeded", "#ffb2b9", "#67001b", "#8e0d2e", "#ffdadd", "#aec6ff", "#002c70", "#17438f", "#d8e2ff", "#a8c8ff", "#002f65", "#00468d", "#d5e3ff", "#ffb4a9", "#680003", "#930006", "#ffdad4", "#9f8c8d", "#201a1a", "#ecdfdf", "#201a1a", "#ecdfdf", "#534344", "#d7c1c2", "#ecdfdf", "#201a1a"]
-    console.log(schemeArr[0]);
-      // CORAL: Calculating surface elevation variables - Light
-    lightPrimaryArr = this.hexToRgb(schemeArr[0]);
-    lightSurfaceArr = this.hexToRgb(schemeArr[18]);
-    lightSurface1 = `rgb(${this.mixRgb(1, lightPrimaryArr, lightSurfaceArr)})`;
-    lightSurface2 = `rgb(${this.mixRgb(2, lightPrimaryArr, lightSurfaceArr)})`;
-    lightSurface3 = `rgb(${this.mixRgb(3, lightPrimaryArr, lightSurfaceArr)})`;
-    lightSurface4 = `rgb(${this.mixRgb(4, lightPrimaryArr, lightSurfaceArr)})`;
-    lightSurface5 = `rgb(${this.mixRgb(5, lightPrimaryArr, lightSurfaceArr)})`;
-    
-    // CORAL: Calculating surface elevation variables - Dark
-    darkPrimaryArr = this.hexToRgb(schemeArr[25]);
-    darkSurfaceArr = this.hexToRgb(schemeArr[43]);
-    darkSurface1 = `rgb(${this.mixRgb(1, darkPrimaryArr, darkSurfaceArr)})`;
-    darkSurface2 = `rgb(${this.mixRgb(2, darkPrimaryArr, darkSurfaceArr)})`;
-    darkSurface3 = `rgb(${this.mixRgb(3, darkPrimaryArr, darkSurfaceArr)})`;
-    darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
-    darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
-    }
-    console.log(schemeArr);
+	mixRgb(
+		elevationLevel: number,
+		base: { r: number; g: number; b: number },
+		secondary: { r: number; g: number; b: number }
+	) {
+		var elevation: number;
+
+		switch (elevationLevel) {
+			case 1:
+				elevation = 0.05;
+				break;
+			case 2:
+				elevation = 0.08;
+				break;
+			case 3:
+				elevation = 0.12;
+				break;
+			case 4:
+				elevation = 0.12;
+				break;
+			case 5:
+				elevation = 0.14;
+				break;
+
+			default:
+				elevation = 0;
+				break;
+		}
+
+		const outputR = Math.round(
+			base.r * elevation + secondary.r * (1 - elevation)
+		);
+		const outputG = Math.round(
+			base.g * elevation + secondary.g * (1 - elevation)
+		);
+		const outputB = Math.round(
+			base.b * elevation + secondary.b * (1 - elevation)
+		);
+
+		return `${outputR},${outputG},${outputB}`;
+	}
+
+	// Source: https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+	hexToRgb(hex: string) {
+		var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+		return result
+			? {
+					r: parseInt(result[1], 16),
+					g: parseInt(result[2], 16),
+					b: parseInt(result[3], 16),
+			  }
+			: null;
+		// hexToRgb("#0033ff").g; // "51";
+	}
+
+	updateScheme() {
+		document.body.removeClass("default", "forest", "old-diary", "custom");
+		document.body.addClass(this.settings.scheme);
+
+		this.app.workspace.trigger("css-change");
+	}
+
+	addCustomTheme() {
+		const obj = JSON.parse(this.settings.input);
+		const schemeArr = this.parseInput(obj);
+
+		// Calculating surface elevation variables - Light
+		const lightPrimaryArr = this.hexToRgb(schemeArr[0]);
+		const lightSurfaceArr = this.hexToRgb(schemeArr[18]);
+		const lightSurface1 = `rgb(${this.mixRgb(
+			1,
+			lightPrimaryArr,
+			lightSurfaceArr
+		)})`;
+		const lightSurface2 = `rgb(${this.mixRgb(
+			2,
+			lightPrimaryArr,
+			lightSurfaceArr
+		)})`;
+		const lightSurface3 = `rgb(${this.mixRgb(
+			3,
+			lightPrimaryArr,
+			lightSurfaceArr
+		)})`;
+		const lightSurface4 = `rgb(${this.mixRgb(
+			4,
+			lightPrimaryArr,
+			lightSurfaceArr
+		)})`;
+		const lightSurface5 = `rgb(${this.mixRgb(
+			5,
+			lightPrimaryArr,
+			lightSurfaceArr
+		)})`;
+
+		// Calculating surface elevation variables - Dark
+		const darkPrimaryArr = this.hexToRgb(schemeArr[25]);
+		const darkSurfaceArr = this.hexToRgb(schemeArr[43]);
+		const darkSurface1 = `rgb(${this.mixRgb(
+			1,
+			darkPrimaryArr,
+			darkSurfaceArr
+		)})`;
+		const darkSurface2 = `rgb(${this.mixRgb(
+			2,
+			darkPrimaryArr,
+			darkSurfaceArr
+		)})`;
+		const darkSurface3 = `rgb(${this.mixRgb(
+			3,
+			darkPrimaryArr,
+			darkSurfaceArr
+		)})`;
+		const darkSurface4 = `rgb(${this.mixRgb(
+			4,
+			darkPrimaryArr,
+			darkSurfaceArr
+		)})`;
+		const darkSurface5 = `rgb(${this.mixRgb(
+			5,
+			darkPrimaryArr,
+			darkSurfaceArr
+		)})`;
+
 		// get the custom css element
-		const el = document.getElementById("obsidian-you-theme");
-		if (!el) throw "obsidian-you-theme element not found!";
+		const el = document.getElementById(
+			"obsidian-you-theme"
+		);
+		if (!el) throw "Light obsidian-you-theme element not found!";
 		else {
 			// set the settings-dependent css
 			el.innerText = `
-      .you-light {
+      .theme-light.custom {
         --primary: ${schemeArr[0]};
         --on-primary: ${schemeArr[1]};
         --primary-container: ${schemeArr[2]};
@@ -151,8 +243,13 @@ export default class YouTheme extends Plugin {
         --surface4: ${lightSurface4};
         --surface5: ${lightSurface5};
       `;
-			el.innerText = `
-      .you-dark {
+			const elDark = document.getElementById(
+				"obsidian-you-theme"
+			);
+			if (!elDark) throw "Dark obsidian-you-theme element not found!";
+			else {
+				elDark.innerText = `
+      .theme-dark.custom {
         --primary: ${schemeArr[25]};
         --on-primary: ${schemeArr[26]};
         --primary-container: ${schemeArr[27]};
@@ -184,189 +281,120 @@ export default class YouTheme extends Plugin {
         --surface4: ${darkSurface4};
         --surface5: ${darkSurface5};
       `;
+			}
 		}
-	}
-
-	parseInput(obj: { entities: { value: any }[] }) {
-		var arr = [];
-		var length = 50;
-
-		for (let i = 0; i < length; i++) {
-			arr.push(obj.entities[i].value);
-		}
-		return arr;
-	}
-
-  mixRgb(elevationLevel:number,base: { r: number; g: number; b: number; },secondary: { r: number; g: number; b: number; }) {
-  var elevation:number;
-
-  switch (elevationLevel) {
-    case 1:
-      elevation = 0.05;
-      break;
-    case 2:
-      elevation = 0.08;
-      break;
-    case 3:
-      elevation = 0.12;
-      break;
-    case 4:
-      elevation = 0.12;
-      break;
-    case 5:
-      elevation = 0.14;
-      break;
-      
-      default:
-      elevation = 0;
-      break;
-  }
-
-  const outputR = Math.round(base.r * elevation + secondary.r * (1 - elevation));
-  const outputG = Math.round(base.g * elevation + secondary.g * (1 - elevation));
-  const outputB = Math.round(base.b * elevation + secondary.b * (1 - elevation));
-
-  return `${outputR},${outputG},${outputB}`;
-  }
-
-	// Source: https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-	hexToRgb(hex: string) {
-		var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-		return result
-			? {
-					r: parseInt(result[1], 16),
-					g: parseInt(result[2], 16),
-					b: parseInt(result[3], 16),
-			  }
-			: null;
-		// hexToRgb("#0033ff").g; // "51";
-	}
-
-	updateScheme() {
-		document.body.removeClass("default", "forest", "old-diary", "custom");
-		document.body.addClass(this.settings.scheme);
-		// @ts-ignore
-		let media = window.matchMedia("(prefers-color-scheme: dark)");
-		if (media.matches) {
-			// Dark Mode
-			// @ts-ignore
-			this.app.changeTheme("obsidian");
-		} else {
-			// Light Mode
-			// @ts-ignore
-			this.app.changeTheme("moonstone");
-		}
-		// @ts-ignore
-		this.app.workspace.trigger("css-change");
 	}
 
 	removeStyle() {
 		document.body.removeClass("default", "forest", "old-diary", "custom");
-		// document.body.addClass("theme-light", "theme-dark");
 		document.body.addClass(this.settings.scheme);
 	}
 }
 
 interface YouSettings {
-  theme: string;
-  scheme: string;
-  input: string;
+	theme: string;
+	scheme: string;
+	input: string;
 }
 
 const DEFAULT_SETTINGS: YouSettings = {
-  theme: 'moonstone',
-  scheme: 'default',
-  input: ''
-}
+	theme: "moonstone",
+	scheme: "default",
+	input: "",
+};
 
 class YouSettingTab extends PluginSettingTab {
+	plugin: YouTheme;
+	constructor(app: App, plugin: YouTheme) {
+		super(app, plugin);
+		this.plugin = plugin;
+	}
 
+	display(): void {
+		let { containerEl } = this;
 
-  plugin: YouTheme;
-  constructor(app: App, plugin: YouTheme) {
-    super(app, plugin);
-    this.plugin = plugin;
-  }
+		containerEl.empty();
+		containerEl.createEl("h3", { text: "Obsidian You Theme Settings" });
+		containerEl.createEl("p", {
+			text: "If you notice any issues, update to the latest version of Obsidian You Theme and reload Obsidian.",
+		});
+		containerEl.createEl("h3");
 
-  display(): void {
-    let {containerEl} = this;
+		new Setting(containerEl)
+			.setName("Colour scheme")
+			.setDesc("Select your colour scheme")
+			.addDropdown((dropdown) =>
+				dropdown
+					.addOption("default", "Default")
+					.addOption("forest", "Forest")
+					.addOption("old-diary", "Old Diary")
+					.addOption("custom", "🚧 Custom (Below)")
+					.setValue(this.plugin.settings.scheme)
+					.onChange((value) => {
+						this.plugin.settings.scheme = value;
+						this.plugin.saveData(this.plugin.settings);
+						this.plugin.refresh();
+					})
+			);
 
-    containerEl.empty();
-    containerEl.createEl('h3', {text: 'Obsidian You Theme Settings'});
-    containerEl.createEl('p', {text: 'If you notice any issues, update to the latest version of Obsidian You Theme and reload Obsidian.'});
-    containerEl.createEl('h3');
+		containerEl.createEl("br");
+		containerEl.createEl("h3");
+		containerEl.createEl("h3", { text: "Custom Colour Scheme" });
+		containerEl.createEl("p", {
+			text: "Paste the content of the tokens.json file.",
+		});
 
+		new Setting(containerEl)
+			.setName("Custom colour scheme")
+			.setDesc("Paste the content of the tokens.json file")
+			.addText((text) =>
+				text
+					.setPlaceholder("")
+					.setValue(this.plugin.settings.input)
+					.onChange((value) => {
+						this.plugin.settings.input = value;
+						this.plugin.saveData(this.plugin.settings);
+						this.plugin.refresh();
+						console.log(JSON.parse(value));
+					})
+			);
 
-      new Setting(containerEl)
-        .setName('Colour scheme')
-        .setDesc('Select your colour scheme')
-        .addDropdown(dropdown => dropdown
-          .addOption('default','Default')
-          .addOption('forest','Forest')
-          .addOption('old-diary','Old Diary')
-          .addOption('custom','Custom (Below)')
-          .setValue(this.plugin.settings.scheme)
-        .onChange((value) => {
-          this.plugin.settings.scheme = value;
-          this.plugin.saveData(this.plugin.settings);
-          this.plugin.refresh();
-        }));
+		containerEl.createEl("br");
+		containerEl.createEl("h3", { text: "Support development" });
 
-    containerEl.createEl('br');
-    containerEl.createEl('h3');
-    containerEl.createEl('h3', {text: 'Custom Colour Scheme'});
-    containerEl.createEl('p', {text: 'Paste the content of the tokens.json file.'});
+		const div = containerEl.createEl("div", {
+			cls: "you-donation",
+		});
 
-    new Setting(containerEl)
-		.setName("Custom colour scheme")
-		.setDesc("Paste the content of the tokens.json file")
-		.addText((text) =>
-			text
-				.setPlaceholder("")
-				.setValue(this.plugin.settings.input)
-				.onChange((value) => {
-					this.plugin.settings.input = value;
-					this.plugin.saveData(this.plugin.settings);
-					this.plugin.refresh();
-					console.log(JSON.parse(value));
-				})
+		const donateText = document.createElement("p");
+		donateText.appendText(
+			"You can help me keep creating tools like this by supporting the development."
+		);
+		div.appendChild(donateText);
+
+		const parser = new DOMParser();
+		div.appendChild(
+			createDonateButton(
+				"https://www.buymeacoffee.com/joschua",
+				parser.parseFromString(buyMeACoffee, "text/xml").documentElement
+			)
 		);
 
-    containerEl.createEl('br');
-    containerEl.createEl('h3', {text: 'Support development'});
-
-    const div = containerEl.createEl('div', {
-      cls: 'you-donation',
-    });
-
-    const donateText = document.createElement('p');
-    donateText.appendText("You can help me keep creating tools like this by supporting the development.");
-    div.appendChild(donateText);
-
-    const parser = new DOMParser();
-    div.appendChild(
-		createDonateButton(
-			"https://www.buymeacoffee.com/joschua",
-			parser.parseFromString(buyMeACoffee, "text/xml").documentElement
-		)
-	);
-
-    div.appendChild(
-      createDonateButton(
-        'https://www.patreon.com/joschua',
-        parser.parseFromString(patreon, 'text/xml').documentElement,
-      ),
-    );
-
-  }
+		div.appendChild(
+			createDonateButton(
+				"https://www.patreon.com/joschua",
+				parser.parseFromString(patreon, "text/xml").documentElement
+			)
+		);
+	}
 }
 
 const createDonateButton = (link: string, img: HTMLElement): HTMLElement => {
-  const a = document.createElement('a');
-  a.setAttribute('href', link);
-  a.addClass('you-donate-button');
-  a.appendChild(img);
-  return a;
+	const a = document.createElement("a");
+	a.setAttribute("href", link);
+	a.addClass("you-donate-button");
+	a.appendChild(img);
+	return a;
 };
 
 const buyMeACoffee = `
