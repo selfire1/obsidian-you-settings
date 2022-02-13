@@ -49,6 +49,7 @@ export default class YouTheme extends Plugin {
 	// update the styles (at the start, or as the result of a settings change)
 	updateStyle() {
 		this.removeStyle();
+    if (this.settings.scheme = "custom") {
     const obj = JSON.parse(this.settings.input);
     var schemeArr = this.parseInput(obj);
   
@@ -70,8 +71,9 @@ export default class YouTheme extends Plugin {
     var darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
     var darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
 
-    if (this.settings.scheme = "old-diary") {
-      schemeArr = ["#af2b44", "#ffffff", "#ffdadd", "#40000d", "#365ca8", "#ffffff", "#d8e2ff", "#001947", "#285ea7", "#ffffff", "#d5e3ff", "#001b3f", "#ba1b1b", "#ffffff", "#ffdad4", "#410001", "#857374", "#fcfcfc", "#201a1a", "#fcfcfc", "#201a1a", "#f4ddde", "#534344", "#362f2f", "#fbeded"]
+    } else if (this.settings.scheme = "old-diary") {
+    schemeArr = ["#af2b44", "#ffffff", "#ffdadd", "#40000d", "#365ca8", "#ffffff", "#d8e2ff", "#001947", "#285ea7", "#ffffff", "#d5e3ff", "#001b3f", "#ba1b1b", "#ffffff", "#ffdad4", "#410001", "#857374", "#fcfcfc", "#201a1a", "#fcfcfc", "#201a1a", "#f4ddde", "#534344", "#362f2f", "#fbeded"]
+    console.log(schemeArr[0]);
       // CORAL: Calculating surface elevation variables - Light
     lightPrimaryArr = this.hexToRgb(schemeArr[0]);
     lightSurfaceArr = this.hexToRgb(schemeArr[18]);
@@ -87,10 +89,10 @@ export default class YouTheme extends Plugin {
     darkSurface1 = `rgb(${this.mixRgb(1, darkPrimaryArr, darkSurfaceArr)})`;
     darkSurface2 = `rgb(${this.mixRgb(2, darkPrimaryArr, darkSurfaceArr)})`;
     darkSurface3 = `rgb(${this.mixRgb(3, darkPrimaryArr, darkSurfaceArr)})`;
-    var darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
-    var darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
+    darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
+    darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
     }
-
+    console.log(schemeArr);
 		// get the custom css element
 		const el = document.getElementById("obsidian-you-theme");
 		if (!el) throw "obsidian-you-theme element not found!";
@@ -239,7 +241,7 @@ export default class YouTheme extends Plugin {
 	}
 
 	removeStyle() {
-		document.body.removeClass("you-default", "you-forest", "old-diary");
+		document.body.removeClass("theme-light", "theme-dark");
 		document.body.addClass(this.settings.scheme);
 	}
 }
@@ -281,6 +283,7 @@ class YouSettingTab extends PluginSettingTab {
           .addOption('you-default','Default')
           .addOption('you-forest','Forest')
           .addOption('old-diary','Old Diary')
+          .addOption('custom','Custom (Below)')
           .setValue(this.plugin.settings.scheme)
         .onChange((value) => {
           this.plugin.settings.scheme = value;
