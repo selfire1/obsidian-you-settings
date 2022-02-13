@@ -10,7 +10,7 @@ export default class YouTheme extends Plugin {
 
 		this.addStyle();
 
-		const colourPalettes = ["default", "you-forest", "old-diary"];
+		const colourPalettes = ["default", "forest", "old-diary"];
 		const theme = ["moonstone", "obsidian"];
 	}
 
@@ -119,7 +119,7 @@ export default class YouTheme extends Plugin {
 		else {
 			// set the settings-dependent css
 			el.innerText = `
-      .theme-light {
+      .you-light {
         --primary: ${schemeArr[0]};
         --on-primary: ${schemeArr[1]};
         --primary-container: ${schemeArr[2]};
@@ -152,7 +152,7 @@ export default class YouTheme extends Plugin {
         --surface5: ${lightSurface5};
       `;
 			el.innerText = `
-      .theme-dark {
+      .you-dark {
         --primary: ${schemeArr[25]};
         --on-primary: ${schemeArr[26]};
         --primary-container: ${schemeArr[27]};
@@ -243,7 +243,7 @@ export default class YouTheme extends Plugin {
 	}
 
 	updateScheme() {
-		document.body.removeClass("theme-light", "theme-dark");
+		document.body.removeClass("default", "forest", "old-diary", "custom");
 		document.body.addClass(this.settings.scheme);
 		// @ts-ignore
 		let media = window.matchMedia("(prefers-color-scheme: dark)");
@@ -261,7 +261,8 @@ export default class YouTheme extends Plugin {
 	}
 
 	removeStyle() {
-		document.body.removeClass("theme-light", "theme-dark");
+		document.body.removeClass("default", "forest", "old-diary", "custom");
+		// document.body.addClass("theme-light", "theme-dark");
 		document.body.addClass(this.settings.scheme);
 	}
 }
@@ -301,7 +302,7 @@ class YouSettingTab extends PluginSettingTab {
         .setDesc('Select your colour scheme')
         .addDropdown(dropdown => dropdown
           .addOption('default','Default')
-          .addOption('you-forest','Forest')
+          .addOption('forest','Forest')
           .addOption('old-diary','Old Diary')
           .addOption('custom','Custom (Below)')
           .setValue(this.plugin.settings.scheme)
