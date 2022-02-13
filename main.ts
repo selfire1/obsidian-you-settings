@@ -49,27 +49,26 @@ export default class YouTheme extends Plugin {
 	// update the styles (at the start, or as the result of a settings change)
 	updateStyle() {
 		this.removeStyle();
-
-		const obj = JSON.parse(this.settings.input);
-		const schemeArr = this.parseInput(obj);
-
+    const obj = JSON.parse(this.settings.input);
+    var schemeArr = this.parseInput(obj);
+  
     // Calculating surface elevation variables - Light
-    const lightPrimaryArr = this.hexToRgb(schemeArr[0]);
-    const lightSurfaceArr = this.hexToRgb(schemeArr[18]);
-    const lightSurface1 = `rgb(${this.mixRgb(1, lightPrimaryArr, lightSurfaceArr)})`;
-    const lightSurface2 = `rgb(${this.mixRgb(2, lightPrimaryArr, lightSurfaceArr)})`;
-    const lightSurface3 = `rgb(${this.mixRgb(3, lightPrimaryArr, lightSurfaceArr)})`;
-    const lightSurface4 = `rgb(${this.mixRgb(4, lightPrimaryArr, lightSurfaceArr)})`;
-    const lightSurface5 = `rgb(${this.mixRgb(5, lightPrimaryArr, lightSurfaceArr)})`;
+    var lightPrimaryArr = this.hexToRgb(schemeArr[0]);
+    var lightSurfaceArr = this.hexToRgb(schemeArr[18]);
+    var lightSurface1 = `rgb(${this.mixRgb(1, lightPrimaryArr, lightSurfaceArr)})`;
+    var lightSurface2 = `rgb(${this.mixRgb(2, lightPrimaryArr, lightSurfaceArr)})`;
+    var lightSurface3 = `rgb(${this.mixRgb(3, lightPrimaryArr, lightSurfaceArr)})`;
+    var lightSurface4 = `rgb(${this.mixRgb(4, lightPrimaryArr, lightSurfaceArr)})`;
+    var lightSurface5 = `rgb(${this.mixRgb(5, lightPrimaryArr, lightSurfaceArr)})`;
     
     // Calculating surface elevation variables - Dark
-    const darkPrimaryArr = this.hexToRgb(schemeArr[25]);
-    const darkSurfaceArr = this.hexToRgb(schemeArr[43]);
-    const darkSurface1 = `rgb(${this.mixRgb(1, darkPrimaryArr, darkSurfaceArr)})`;
-    const darkSurface2 = `rgb(${this.mixRgb(2, darkPrimaryArr, darkSurfaceArr)})`;
-    const darkSurface3 = `rgb(${this.mixRgb(3, darkPrimaryArr, darkSurfaceArr)})`;
-    const darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
-    const darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
+    var darkPrimaryArr = this.hexToRgb(schemeArr[25]);
+    var darkSurfaceArr = this.hexToRgb(schemeArr[43]);
+    var darkSurface1 = `rgb(${this.mixRgb(1, darkPrimaryArr, darkSurfaceArr)})`;
+    var darkSurface2 = `rgb(${this.mixRgb(2, darkPrimaryArr, darkSurfaceArr)})`;
+    var darkSurface3 = `rgb(${this.mixRgb(3, darkPrimaryArr, darkSurfaceArr)})`;
+    var darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
+    var darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
 
 		// get the custom css element
 		const el = document.getElementById("obsidian-you-theme");
@@ -142,7 +141,6 @@ export default class YouTheme extends Plugin {
         --surface4: ${darkSurface4};
         --surface5: ${darkSurface5};
       `;
-    
 		}
 	}
 
@@ -266,7 +264,7 @@ class YouSettingTab extends PluginSettingTab {
         .onChange((value) => {
           this.plugin.settings.scheme = value;
           this.plugin.saveData(this.plugin.settings);
-          this.plugin.removeStyle();
+          this.plugin.refresh();
         }));
 
     containerEl.createEl('br');
