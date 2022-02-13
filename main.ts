@@ -109,12 +109,46 @@ export default class YouTheme extends Plugin {
         --surface4: ${lightSurface4};
         --surface5: ${lightSurface5};
       `;
+			el.innerText = `
+      .theme-dark {
+        --primary: ${schemeArr[25]};
+        --on-primary: ${schemeArr[26]};
+        --primary-container: ${schemeArr[27]};
+        --on-primary-container: ${schemeArr[28]};
+        --secondary: ${schemeArr[29]};
+        --on-secondary: ${schemeArr[30]};
+        --secondary-container: ${schemeArr[31]};
+        --on-secondary-container: ${schemeArr[32]};
+        --tertiary: ${schemeArr[33]};
+        --on-tertiary: ${schemeArr[34]};
+        --tertiary-container: ${schemeArr[35]};
+        --on-tertiary-container: ${schemeArr[36]};
+        --error: ${schemeArr[37]};
+        --error-container: ${schemeArr[38]};
+        --on-error: ${schemeArr[39]};
+        --on-error-container: ${schemeArr[40]};
+        --background: ${schemeArr[41]};
+        --on-background: ${schemeArr[42]};
+        --surface: ${schemeArr[43]};
+        --on-surface: ${schemeArr[44]};
+        --surface-variant: ${schemeArr[45]};
+        --on-surface-variant: ${schemeArr[46]};
+        --outline: ${schemeArr[47]};
+        --inverse-on-surface: ${schemeArr[48]};
+        --inverse-surface: ${schemeArr[49]};
+        --surface1: ${darkSurface1};
+        --surface2: ${darkSurface2};
+        --surface3: ${darkSurface3};
+        --surface4: ${darkSurface4};
+        --surface5: ${darkSurface5};
+      `;
+    
 		}
 	}
 
 	parseInput(obj: { entities: { value: any }[] }) {
 		var arr = [];
-		var length = 25;
+		var length = 50;
 
 		for (let i = 0; i < length; i++) {
 			arr.push(obj.entities[i].value);
