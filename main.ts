@@ -202,7 +202,7 @@ export default class YouTheme extends Plugin {
 	}
 
 	updateScheme() {
-		document.body.removeClass("you-default", "you-forest", "you-coral");
+		document.body.removeClass("theme-light", "theme-dark");
 		document.body.addClass(this.settings.scheme);
 		// @ts-ignore
 		let media = window.matchMedia("(prefers-color-scheme: dark)");
