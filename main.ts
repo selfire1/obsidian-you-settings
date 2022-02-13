@@ -92,7 +92,7 @@ export default class YouTheme extends Plugin {
     darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
 
     } else if (this.settings.scheme = "old-diary") {
-    schemeArr = ["#af2b44", "#ffffff", "#ffdadd", "#40000d", "#365ca8", "#ffffff", "#d8e2ff", "#001947", "#285ea7", "#ffffff", "#d5e3ff", "#001b3f", "#ba1b1b", "#ffffff", "#ffdad4", "#410001", "#857374", "#fcfcfc", "#201a1a", "#fcfcfc", "#201a1a", "#f4ddde", "#534344", "#362f2f", "#fbeded"]
+    schemeArr = ["#af2b44", "#ffffff", "#ffdadd", "#40000d", "#365ca8", "#ffffff", "#d8e2ff", "#001947", "#285ea7", "#ffffff", "#d5e3ff", "#001b3f", "#ba1b1b", "#ffffff", "#ffdad4", "#410001", "#857374", "#fcfcfc", "#201a1a", "#fcfcfc", "#201a1a", "#f4ddde", "#534344", "#362f2f", "#fbeded", "#ffb2b9", "#67001b", "#8e0d2e", "#ffdadd", "#aec6ff", "#002c70", "#17438f", "#d8e2ff", "#a8c8ff", "#002f65", "#00468d", "#d5e3ff", "#ffb4a9", "#680003", "#930006", "#ffdad4", "#9f8c8d", "#201a1a", "#ecdfdf", "#201a1a", "#ecdfdf", "#534344", "#d7c1c2", "#ecdfdf", "#201a1a"]
     console.log(schemeArr[0]);
       // CORAL: Calculating surface elevation variables - Light
     lightPrimaryArr = this.hexToRgb(schemeArr[0]);
