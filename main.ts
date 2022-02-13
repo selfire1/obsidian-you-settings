@@ -54,13 +54,13 @@ export default class YouTheme extends Plugin {
 		const schemeArr = this.parseInput(obj);
 
     // Calculating surface elevation variables
-    const primaryArr = this.hexToRgb(schemeArr[0]);
-    const surfaceArr = this.hexToRgb(schemeArr[18]);
-    const surface1 = `rgb(${this.mixRgb(1, primaryArr, surfaceArr)})`;
-    const surface2 = `rgb(${this.mixRgb(2, primaryArr, surfaceArr)})`;
-    const surface3 = `rgb(${this.mixRgb(3, primaryArr, surfaceArr)})`;
-    const surface4 = `rgb(${this.mixRgb(4, primaryArr, surfaceArr)})`;
-    const surface5 = `rgb(${this.mixRgb(5, primaryArr, surfaceArr)})`;
+    const lightPrimaryArr = this.hexToRgb(schemeArr[0]);
+    const lightSurfaceArr = this.hexToRgb(schemeArr[18]);
+    const lightSurface1 = `rgb(${this.mixRgb(1, lightPrimaryArr, lightSurfaceArr)})`;
+    const lightSurface2 = `rgb(${this.mixRgb(2, lightPrimaryArr, lightSurfaceArr)})`;
+    const lightSurface3 = `rgb(${this.mixRgb(3, lightPrimaryArr, lightSurfaceArr)})`;
+    const lightSurface4 = `rgb(${this.mixRgb(4, lightPrimaryArr, lightSurfaceArr)})`;
+    const lightSurface5 = `rgb(${this.mixRgb(5, lightPrimaryArr, lightSurfaceArr)})`;
 
 		// get the custom css element
 		const el = document.getElementById("obsidian-you-theme");
@@ -68,7 +68,7 @@ export default class YouTheme extends Plugin {
 		else {
 			// set the settings-dependent css
 			el.innerText = `
-      body.obsidian-you-theme{
+      .theme-light {
         --primary: ${schemeArr[0]};
         --on-primary: ${schemeArr[1]};
         --primary-container: ${schemeArr[2]};
@@ -94,11 +94,11 @@ export default class YouTheme extends Plugin {
         --outline: ${schemeArr[22]};
         --inverse-on-surface: ${schemeArr[23]};
         --inverse-surface: ${schemeArr[24]};
-        --surface1: ${surface1};
-        --surface2: ${surface2};
-        --surface3: ${surface3};
-        --surface4: ${surface4};
-        --surface5: ${surface5};
+        --surface1: ${lightSurface1};
+        --surface2: ${lightSurface2};
+        --surface3: ${lightSurface3};
+        --surface4: ${lightSurface4};
+        --surface5: ${lightSurface5};
       `;
 		}
 	}
