@@ -10,7 +10,7 @@ export default class YouTheme extends Plugin {
 
 		this.addStyle();
 
-		const colourPalettes = ["you-default", "you-forest", "old-diary"];
+		const colourPalettes = ["default", "you-forest", "old-diary"];
 		const theme = ["moonstone", "obsidian"];
 	}
 
@@ -49,10 +49,8 @@ export default class YouTheme extends Plugin {
 	// update the styles (at the start, or as the result of a settings change)
 	updateStyle() {
 		this.removeStyle();
-    if (this.settings.scheme = "custom") {
-    const obj = JSON.parse(this.settings.input);
-    var schemeArr = this.parseInput(obj);
-  
+    // Default theme: no theme specified
+    var schemeArr = ["#5F4BBD", "#FFFFFF", "#E7DEFF", "#1A0064", "#605C71", "#FFFFFF", "#E6DFF9", "#1C192C", "#7C5264", "#FFFFFF", "#FFD9E8", "#301020", "#BA1B1B", "#FFDAD4", "#FFFFFF", "#410001", "#FFFBFF", "#1C1B1E", "#FFFBFF", "#FFFBFF", "#1C1B1E", "#E5E0EB", "#48454F", "#79767F", "#F4EFF4", "#313033", "#CABEFF", "#CABEFF", "#30128D", "#4731A4", "#E7DEFF", "#C9C3DC", "#312E41", "#484459", "#E6DFF9", "#EDB8CD", "#482535", "#623B4C", "#FFD9E8", "#FFB4A9", "#930006", "#680003", "#FFDAD4", "#1C1B1E", "#E5E1E5", "#1C1B1E", "#E5E1E5", "#48454F", "#C9C4D0", "#938F99", "#1C1B1E", "#E5E1E5", "#5F4BBD"];
     // Calculating surface elevation variables - Light
     var lightPrimaryArr = this.hexToRgb(schemeArr[0]);
     var lightSurfaceArr = this.hexToRgb(schemeArr[18]);
@@ -61,7 +59,7 @@ export default class YouTheme extends Plugin {
     var lightSurface3 = `rgb(${this.mixRgb(3, lightPrimaryArr, lightSurfaceArr)})`;
     var lightSurface4 = `rgb(${this.mixRgb(4, lightPrimaryArr, lightSurfaceArr)})`;
     var lightSurface5 = `rgb(${this.mixRgb(5, lightPrimaryArr, lightSurfaceArr)})`;
-    
+
     // Calculating surface elevation variables - Dark
     var darkPrimaryArr = this.hexToRgb(schemeArr[25]);
     var darkSurfaceArr = this.hexToRgb(schemeArr[43]);
@@ -70,6 +68,28 @@ export default class YouTheme extends Plugin {
     var darkSurface3 = `rgb(${this.mixRgb(3, darkPrimaryArr, darkSurfaceArr)})`;
     var darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
     var darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
+
+    if (this.settings.scheme = "custom") {
+    const obj = JSON.parse(this.settings.input);
+    schemeArr = this.parseInput(obj);
+  
+    // Calculating surface elevation variables - Light
+    lightPrimaryArr = this.hexToRgb(schemeArr[0]);
+    lightSurfaceArr = this.hexToRgb(schemeArr[18]);
+    lightSurface1 = `rgb(${this.mixRgb(1, lightPrimaryArr, lightSurfaceArr)})`;
+    lightSurface2 = `rgb(${this.mixRgb(2, lightPrimaryArr, lightSurfaceArr)})`;
+    lightSurface3 = `rgb(${this.mixRgb(3, lightPrimaryArr, lightSurfaceArr)})`;
+    lightSurface4 = `rgb(${this.mixRgb(4, lightPrimaryArr, lightSurfaceArr)})`;
+    lightSurface5 = `rgb(${this.mixRgb(5, lightPrimaryArr, lightSurfaceArr)})`;
+    
+    // Calculating surface elevation variables - Dark
+    darkPrimaryArr = this.hexToRgb(schemeArr[25]);
+    darkSurfaceArr = this.hexToRgb(schemeArr[43]);
+    darkSurface1 = `rgb(${this.mixRgb(1, darkPrimaryArr, darkSurfaceArr)})`;
+    darkSurface2 = `rgb(${this.mixRgb(2, darkPrimaryArr, darkSurfaceArr)})`;
+    darkSurface3 = `rgb(${this.mixRgb(3, darkPrimaryArr, darkSurfaceArr)})`;
+    darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
+    darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
 
     } else if (this.settings.scheme = "old-diary") {
     schemeArr = ["#af2b44", "#ffffff", "#ffdadd", "#40000d", "#365ca8", "#ffffff", "#d8e2ff", "#001947", "#285ea7", "#ffffff", "#d5e3ff", "#001b3f", "#ba1b1b", "#ffffff", "#ffdad4", "#410001", "#857374", "#fcfcfc", "#201a1a", "#fcfcfc", "#201a1a", "#f4ddde", "#534344", "#362f2f", "#fbeded"]
@@ -254,7 +274,7 @@ interface YouSettings {
 
 const DEFAULT_SETTINGS: YouSettings = {
   theme: 'moonstone',
-  scheme: 'you-default',
+  scheme: 'default',
   input: ''
 }
 
@@ -280,7 +300,7 @@ class YouSettingTab extends PluginSettingTab {
         .setName('Colour scheme')
         .setDesc('Select your colour scheme')
         .addDropdown(dropdown => dropdown
-          .addOption('you-default','Default')
+          .addOption('default','Default')
           .addOption('you-forest','Forest')
           .addOption('old-diary','Old Diary')
           .addOption('custom','Custom (Below)')
