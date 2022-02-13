@@ -10,7 +10,7 @@ export default class YouTheme extends Plugin {
 
 		this.addStyle();
 
-		const colourPalettes = ["you-default", "you-forest", "you-coral"];
+		const colourPalettes = ["you-default", "you-forest", "old-diary"];
 		const theme = ["moonstone", "obsidian"];
 	}
 
@@ -69,6 +69,27 @@ export default class YouTheme extends Plugin {
     var darkSurface3 = `rgb(${this.mixRgb(3, darkPrimaryArr, darkSurfaceArr)})`;
     var darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
     var darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
+
+    if (this.settings.scheme = "old-diary") {
+      schemeArr = ["#af2b44", "#ffffff", "#ffdadd", "#40000d", "#365ca8", "#ffffff", "#d8e2ff", "#001947", "#285ea7", "#ffffff", "#d5e3ff", "#001b3f", "#ba1b1b", "#ffffff", "#ffdad4", "#410001", "#857374", "#fcfcfc", "#201a1a", "#fcfcfc", "#201a1a", "#f4ddde", "#534344", "#362f2f", "#fbeded"]
+      // CORAL: Calculating surface elevation variables - Light
+    lightPrimaryArr = this.hexToRgb(schemeArr[0]);
+    lightSurfaceArr = this.hexToRgb(schemeArr[18]);
+    lightSurface1 = `rgb(${this.mixRgb(1, lightPrimaryArr, lightSurfaceArr)})`;
+    lightSurface2 = `rgb(${this.mixRgb(2, lightPrimaryArr, lightSurfaceArr)})`;
+    lightSurface3 = `rgb(${this.mixRgb(3, lightPrimaryArr, lightSurfaceArr)})`;
+    lightSurface4 = `rgb(${this.mixRgb(4, lightPrimaryArr, lightSurfaceArr)})`;
+    lightSurface5 = `rgb(${this.mixRgb(5, lightPrimaryArr, lightSurfaceArr)})`;
+    
+    // CORAL: Calculating surface elevation variables - Dark
+    darkPrimaryArr = this.hexToRgb(schemeArr[25]);
+    darkSurfaceArr = this.hexToRgb(schemeArr[43]);
+    darkSurface1 = `rgb(${this.mixRgb(1, darkPrimaryArr, darkSurfaceArr)})`;
+    darkSurface2 = `rgb(${this.mixRgb(2, darkPrimaryArr, darkSurfaceArr)})`;
+    darkSurface3 = `rgb(${this.mixRgb(3, darkPrimaryArr, darkSurfaceArr)})`;
+    var darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
+    var darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
+    }
 
 		// get the custom css element
 		const el = document.getElementById("obsidian-you-theme");
@@ -218,7 +239,7 @@ export default class YouTheme extends Plugin {
 	}
 
 	removeStyle() {
-		document.body.removeClass("you-default", "you-forest", "you-coral");
+		document.body.removeClass("you-default", "you-forest", "old-diary");
 		document.body.addClass(this.settings.scheme);
 	}
 }
@@ -259,7 +280,7 @@ class YouSettingTab extends PluginSettingTab {
         .addDropdown(dropdown => dropdown
           .addOption('you-default','Default')
           .addOption('you-forest','Forest')
-          .addOption('you-coral','Coral')
+          .addOption('old-diary','Old Diary')
           .setValue(this.plugin.settings.scheme)
         .onChange((value) => {
           this.plugin.settings.scheme = value;
