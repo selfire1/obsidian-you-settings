@@ -53,7 +53,7 @@ export default class YouTheme extends Plugin {
 		const obj = JSON.parse(this.settings.input);
 		const schemeArr = this.parseInput(obj);
 
-    // Calculating surface elevation variables
+    // Calculating surface elevation variables - Light
     const lightPrimaryArr = this.hexToRgb(schemeArr[0]);
     const lightSurfaceArr = this.hexToRgb(schemeArr[18]);
     const lightSurface1 = `rgb(${this.mixRgb(1, lightPrimaryArr, lightSurfaceArr)})`;
@@ -61,6 +61,15 @@ export default class YouTheme extends Plugin {
     const lightSurface3 = `rgb(${this.mixRgb(3, lightPrimaryArr, lightSurfaceArr)})`;
     const lightSurface4 = `rgb(${this.mixRgb(4, lightPrimaryArr, lightSurfaceArr)})`;
     const lightSurface5 = `rgb(${this.mixRgb(5, lightPrimaryArr, lightSurfaceArr)})`;
+    
+    // Calculating surface elevation variables - Dark
+    const darkPrimaryArr = this.hexToRgb(schemeArr[25]);
+    const darkSurfaceArr = this.hexToRgb(schemeArr[43]);
+    const darkSurface1 = `rgb(${this.mixRgb(1, darkPrimaryArr, darkSurfaceArr)})`;
+    const darkSurface2 = `rgb(${this.mixRgb(2, darkPrimaryArr, darkSurfaceArr)})`;
+    const darkSurface3 = `rgb(${this.mixRgb(3, darkPrimaryArr, darkSurfaceArr)})`;
+    const darkSurface4 = `rgb(${this.mixRgb(4, darkPrimaryArr, darkSurfaceArr)})`;
+    const darkSurface5 = `rgb(${this.mixRgb(5, darkPrimaryArr, darkSurfaceArr)})`;
 
 		// get the custom css element
 		const el = document.getElementById("obsidian-you-theme");
